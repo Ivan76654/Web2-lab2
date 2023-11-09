@@ -18,6 +18,9 @@
             <div class="container">
                 <p class="note">
                     <span class="note-highlighter">Note: </span>
+                    By enabling SQL Injection vulnerability you can fetch data from all users stored in the database by typing <span class="command-highlighter">' OR '1'='1</span>
+                    in the Username and Password fields. This is possible because there is no active form input validation and because the username and password values are
+                    concatenated directly into SQL query string instead of using prepared SQL statements.
                 </p>
                 <form action="sqlInjection" method="post">
                     <p><label for="sqlInjectionVulnerability">

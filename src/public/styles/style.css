@@ -25,6 +25,11 @@ span.note-highlighter {
     font-weight: bold;
 }
 
+span.command-highlighter {
+    font-weight: bold;
+    background-color: yellow;
+}
+
 p.error {
     color: red;
 }
