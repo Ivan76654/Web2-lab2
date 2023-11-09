@@ -9,3 +9,22 @@ html {
 body {
     height: 100%;
 }
+
+section {
+    padding: 5px;
+    border: 1px solid black;
+}
+
+h2 {
+    text-decoration: underline;
+}
+
+span.note-highlighter {
+    color: red;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+p.error {
+    color: red;
+}

@@ -9,6 +9,33 @@
     <title>Lab Project 2</title>
 </head>
 <body>
-    <p>Test view</p>
+    <header>
+        <h1>Second Project</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Task 1.1. SQL Injection</h2>
+            <div class="container">
+                <p class="note">
+                    <span class="note-highlighter">Note: </span>
+                </p>
+                <form action="sqlInjection" method="post">
+                    <p><label for="sqlInjectionVulnerability">
+                            <input type="checkbox" name="sqlInjectionVulnerability" <%= sqlInjectionEnabled ? 'checked': '' %>>
+                            Enable SQL Injection vulnerability
+                        </label>
+                    </p>
+                    <p><label for="username">Username: <input type="text" name="username" id="username"></label></p>
+                    <p><label for="password">Password: <input type="password" name="password" id="password"></label></p>
+                    <button type="submit">Show My Data</button>
+                </form>
+                <% if (formSubmitted && !error) { %>
+                    <p><%= userData %></p>
+                <% } else { %>
+                    <p class="error"><%= error %></p>
+                <% } %>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
