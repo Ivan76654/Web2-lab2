@@ -10,32 +10,68 @@
 </head>
 <body>
     <header>
-        <h1>Second Project</h1>
+        <h1>Web2 - Second Project</h1>
     </header>
     <main>
         <section>
             <h2>Task 1.1. SQL Injection</h2>
             <div class="container">
                 <p class="note">
-                    <span class="note-highlighter">Note: </span>
+                    <span class="note-highlighter">Note:</span>
                     By enabling SQL Injection vulnerability you can fetch data from all users stored in the database by typing <span class="command-highlighter">' OR '1'='1</span>
                     in the Username and Password fields. This is possible because there is no active form input validation and because the username and password values are
                     concatenated directly into SQL query string instead of using prepared SQL statements.
                 </p>
                 <form action="sqlInjection" method="post">
-                    <p><label for="sqlInjectionVulnerability">
+                    <p>
+                        <label for="sqlInjectionVulnerability">
                             <input type="checkbox" name="sqlInjectionVulnerability" <%= sqlInjectionEnabled ? 'checked': '' %>>
                             Enable SQL Injection vulnerability
                         </label>
                     </p>
-                    <p><label for="username">Username: <input type="text" name="username" id="username"></label></p>
-                    <p><label for="password">Password: <input type="password" name="password" id="password"></label></p>
+                    <p><label for="username">Username: <input type="text" name="username" required></label></p>
+                    <p><label for="password">Password: <input type="password" name="password" required></label></p>
                     <button type="submit">Show My Data</button>
                 </form>
-                <% if (formSubmitted && !error) { %>
+                <% if (sqlInjectionFormSubmitted && !error) { %>
                     <p><%= userData %></p>
                 <% } else { %>
-                    <p class="error"><%= error %></p>
+                    <% if (sqlInjectionFormSubmitted) { %>
+                        <p class="error"><%= error %></p>
+                    <% } %>
+                <% } %>
+            </div>
+        </section>
+        <section>
+            <h2>Task 2.1. Broken Authentication</h2>
+            <div class="container">
+                <p class="note">
+                    <span class="note-highlighter">Note:</span>
+                    By enabling Broken Authentication vulnerability you have unlimited login attempts which means you can try to guess
+                    someone's username and password as much as you want without consequences. You also get convenient error messages on
+                    a failed attempt meaning that if you try to log in with a username that does not exist, the app will tell you that
+                    there is no user with the given username and the same goes for the password. If the vulnerability is not enabled,
+                    then the app will count failed attempts for client's IP address and after fifth failed login attempt the client's
+                    IP address is added to the blacklist and the client can not log in from the same IP address. If you get blocked, you
+                    can clear the blacklist by enabling the vulnerability and submitting the form with valid or invalid data.
+                </p>
+                <form action="brokenAuthentication" method="post">
+                    <p>
+                        <label for="brokenAuthVulnerability">
+                            <input type="checkbox" name="brokenAuthVulnerability" <%= brokenAuthenticationEnabled ? 'checked': '' %>>
+                            Enable Broken Authentication vulnerability
+                        </label>
+                    </p>
+                    <p><label for="loginUsername">Username: <input type="text" name="loginUsername" required></label></p>
+                    <p><label for="loginPassword">Password: <input type="password" name="loginPassword" required></label></p>
+                    <button type="submit">Login</button>
+                </form>
+                <% if (brokenAuthenticationFormSubmitted && !error) { %>
+                    <p>Welcome back <%= userData.firstname %>.</p>
+                <% } else { %>
+                    <% if (brokenAuthenticationFormSubmitted) { %>
+                        <p class="error"><%= error %></p>
+                    <% } %>
                 <% } %>
             </div>
         </section>
