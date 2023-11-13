@@ -22,7 +22,14 @@ function ipBlacklist(req: Request, res: Response, next: NextFunction) {
         req.headers['x-forwarded-for'] ||
         req.ip ||
         req.socket.remoteAddress;
-      
+
+      console.log('=====');
+      console.log(req.headers['x-real-ip']);
+      console.log(req.headers['x-forwarded-for']);
+      console.log(req.ip);
+      console.log(req.socket.remoteAddress);
+      console.log('=====');
+
       const getBlackListQuery = `SELECT * FROM ipblacklist WHERE ipAddress = $1;`;
 
       try {
