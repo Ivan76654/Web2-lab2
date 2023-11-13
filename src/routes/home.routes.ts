@@ -102,8 +102,10 @@ homeRoutes.post('/brokenAuthentication', ipBlacklist, (req: Request, res: Respon
         }
 
       } else {
+        const ipAddress = req.headers['x-forwarded-for'] ? (<string>req.headers['x-forwarded-for']).split(', ')[0] : req.socket.remoteAddress;
+
         if (result.rowCount == 0) {
-          await updateIpBlacklistOnFailedLoginAttempt(req.socket.remoteAddress);
+          await updateIpBlacklistOnFailedLoginAttempt(ipAddress);
 
           res.render('home', {
             sqlInjectionEnabled: false,
@@ -114,7 +116,7 @@ homeRoutes.post('/brokenAuthentication', ipBlacklist, (req: Request, res: Respon
           });
 
         } else {
-          await clearIpAddressFromIpBlacklistOnSuccessfulLogin(req.socket.remoteAddress);
+          await clearIpAddressFromIpBlacklistOnSuccessfulLogin(ipAddress);
 
           res.render('home', {
             sqlInjectionEnabled: false,

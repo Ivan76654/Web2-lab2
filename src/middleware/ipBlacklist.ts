@@ -19,12 +19,6 @@ function ipBlacklist(req: Request, res: Response, next: NextFunction) {
     (async () => {
       const ipAddress = req.headers['x-forwarded-for'] ? (<string>req.headers['x-forwarded-for']).split(', ')[0] : req.socket.remoteAddress;
 
-      console.log('=====');
-      console.log(req.headers['x-forwarded-for']);
-      console.log(typeof req.headers['x-forwarded-for']);
-      console.log(ipAddress);
-      console.log('=====');
-
       const getBlackListQuery = `SELECT * FROM ipblacklist WHERE ipAddress = $1;`;
 
       try {
