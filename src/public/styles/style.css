@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+section {
+    padding: 5px;
+    border: 1px solid black;
+    margin-bottom: 5px;
+}
+
+h2 {
+    text-decoration: underline;
+}
+
+span.note-highlighter {
+    color: red;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+span.command-highlighter {
+    font-weight: bold;
+    background-color: yellow;
+}
+
+p.error {
+    color: red;
+}
