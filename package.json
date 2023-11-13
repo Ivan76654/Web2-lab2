@@ -5,10 +5,14 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run clean && tsc && npm run copy-views && npm run copy-public",
+    "build-linux": "npm run clean-linux && tsc && npm run copy-views-linux && npm run copy-public-linux",
     "clean": "if exist dist rmdir /s /q dist",
+    "clean-linux": "if [ -d dist ]; then rm -r dist; fi",
     "copy-views": "robocopy /mir /NFL /NDL /NJH /NJS /nc /ns /np src/views/ dist/views & exit 0",
+    "copy-views-linux": "cp -r src/views/ dist/views/ && exit 0",
     "copy-public": "robocopy /mir /NFL /NDL /NJH /NJS /nc /ns /np src/public/ dist/public & exit 0",
-    "start": "npm run build && node dist/app.js"
+    "copy-public-linux": "cp -r src/public/ dist/public/ && exit 0",
+    "start": "node dist/app.js"
   },
   "author": "Ivan Lovrić",
   "license": "ISC",
