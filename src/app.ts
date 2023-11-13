@@ -20,5 +20,13 @@ app.use(express.json());
 app.use('/', homeRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Server started at: http://${HOST}:${PORT}/`);
+  const externalUrl = process.env.RENDER_EXTERNAL_URL;
+
+  if (externalUrl) {
+    console.log(`Server running on: ${externalUrl}`);
+
+    return;
+  }
+
+  console.log(`Server running on: http://${HOST}:${PORT}/`);
 });

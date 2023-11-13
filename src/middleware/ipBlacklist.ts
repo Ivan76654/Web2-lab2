@@ -45,7 +45,7 @@ function ipBlacklist(req: Request, res: Response, next: NextFunction) {
       } catch (err) {
         console.log(err.message);
 
-        res.redirect(500, '/error')
+        res.sendStatus(500);
       }
     })();
 

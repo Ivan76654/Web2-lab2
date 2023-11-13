@@ -53,12 +53,13 @@ homeRoutes.post('/sqlInjection', (req, res) => {
       }
 
     } catch (err) {
+      console.log(err.message);
       res.render('home', {
         sqlInjectionEnabled: vulnerabilityOn,
         sqlInjectionFormSubmitted: true,
         brokenAuthenticationEnabled: false,
         brokenAuthenticationFormSubmitted: false,
-        error: err.message
+        error: 'Something went wrong.'
       });
     }
 
@@ -130,8 +131,7 @@ homeRoutes.post('/brokenAuthentication', ipBlacklist, (req: Request, res: Respon
     } catch (err) {
       console.log(err);
 
-      res.status(500);
-      res.send(err.message);
+      res.sendStatus(500);
     }
 
   })();
