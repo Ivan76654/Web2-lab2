@@ -17,17 +17,12 @@ function ipBlacklist(req: Request, res: Response, next: NextFunction) {
     console.log('Checking IP blacklist.');
 
     (async () => {
-      const ipAddress =
-        req.headers['x-real-ip'] ||
-        req.headers['x-forwarded-for'] ||
-        req.ip ||
-        req.socket.remoteAddress;
+      const ipAddress = req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'][0] : req.socket.remoteAddress;
 
       console.log('=====');
-      console.log(req.headers['x-real-ip']);
       console.log(req.headers['x-forwarded-for']);
-      console.log(req.ip);
-      console.log(req.socket.remoteAddress);
+      console.log(typeof req.headers['x-forwarded-for']);
+      console.log(ipAddress);
       console.log('=====');
 
       const getBlackListQuery = `SELECT * FROM ipblacklist WHERE ipAddress = $1;`;
