@@ -17,7 +17,12 @@ function ipBlacklist(req: Request, res: Response, next: NextFunction) {
     console.log('Checking IP blacklist.');
 
     (async () => {
-      const ipAddress = req.socket.remoteAddress;
+      const ipAddress =
+        req.headers['x-real-ip'] ||
+        req.headers['x-forwarded-for'] ||
+        req.ip ||
+        req.socket.remoteAddress;
+      
       const getBlackListQuery = `SELECT * FROM ipblacklist WHERE ipAddress = $1;`;
 
       try {
